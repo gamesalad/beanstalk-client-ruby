@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{beanstalk-client}
-  s.version = "1.1.1"
+  s.version = "1.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Keith Rarick"]
@@ -43,6 +43,8 @@ Gem::Specification.new do |s|
     "test/helper.rb",
      "test/test_beanstalk-client.rb"
   ]
+
+  s.add_dependency('childprocess', '>= 0.3.5')
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

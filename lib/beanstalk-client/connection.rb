@@ -20,6 +20,7 @@ require 'fcntl'
 require 'yaml'
 require 'set'
 require 'thread'
+require 'childprocess'
 
 module Beanstalk
   class Connection
@@ -42,6 +43,8 @@ module Beanstalk
       @socket = TCPSocket.new(host, port.to_i)
 
       # Don't leak fds when we exec.
+      ChildProcess.close_on_exec(@socket)
+      =begin
       if RUBY_PLATFORM =~ /mswin|mingw|cygwin/
         # Windows doesn't support SETFD etc
         @socket.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK)
@@ -49,6 +52,7 @@ module Beanstalk
         # Don't leak fds when we exec.
         @socket.fcntl(Fcntl::F_SETFD, Fcntl::FD_CLOEXEC)
       end
+      =end
     end
 
     def close
